@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,26 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.App {
+  margin: 0 auto;
+  display: grid;
+  width: 1200px;
+  grid-template-areas:
+    'header header'
+    'navbar main';
+
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+}
+
+.App-content {
+  grid-area: 'main';
+  background-color: cornflowerblue;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
 }
