@@ -1,5 +1,7 @@
 .item {
   color: greenyellow;
+  background-color: hotpink;
+  margin-top: 10px;
 }
 
 .item img {
