@@ -9,7 +9,7 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import { Route } from 'react-router-dom';
 
-function App({ appState }) {
+function App({ appState, addPost, updateNewPostText }) {
   return (
     <div className="App">
       <Header />
@@ -17,7 +17,13 @@ function App({ appState }) {
       <div className="App-content">
         <Route
           path="/profile"
-          render={() => <Profile data={appState.profilePage} />}
+          render={() => (
+            <Profile
+              data={appState.profilePage}
+              addPost={addPost}
+              updateNewPostText={updateNewPostText}
+            />
+          )}
         />
         <Route
           path="/dialogs"

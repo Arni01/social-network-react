@@ -3,11 +3,16 @@ import React from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPosts from './MyPosts/MyPosts';
 
-const Profile = ({ data }) => {
+const Profile = ({ data, addPost, updateNewPostText }) => {
   return (
     <main className="App-content">
       <ProfileInfo />
-      <MyPosts postsData={data.postsData} />
+      <MyPosts
+        postsData={data.postsData}
+        addPost={addPost}
+        updateNewPostText={updateNewPostText}
+        newPostText={data.newPostText}
+      />
     </main>
   );
 };
