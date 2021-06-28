@@ -7,14 +7,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 let rerenderEntireTree = () => {
-  // debugger;
   ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
         <App
           appState={store.getState()}
-          addPost={() => store.addPost()}
-          updateNewPostText={(value) => store.updateNewPostText(value)}
+          dispatch={(action) => store.dispatch(action)}
         />
       </BrowserRouter>
     </React.StrictMode>,
