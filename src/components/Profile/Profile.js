@@ -1,17 +1,13 @@
 import React from 'react';
 // import { content } from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import MyPosts from './MyPosts/MyPosts';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
 
-const Profile = ({ data, dispatch }) => {
+const Profile = ({ store }) => {
   return (
     <main className="App-content">
       <ProfileInfo />
-      <MyPosts
-        postsData={data.postsData}
-        dispatch={dispatch}
-        newPostText={data.newPostText}
-      />
+      <MyPostsContainer store={store} />
     </main>
   );
 };

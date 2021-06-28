@@ -8,24 +8,18 @@ import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import { Route } from 'react-router-dom';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
-function App({ appState, dispatch }) {
+function App({ store }) {
   return (
     <div className="App">
       <Header />
       <Navbar />
       <div className="App-content">
-        <Route
-          path="/profile"
-          render={() => (
-            <Profile data={appState.profilePage} dispatch={dispatch} />
-          )}
-        />
+        <Route path="/profile" render={() => <Profile store={store} />} />
         <Route
           path="/dialogs"
-          render={() => (
-            <Dialogs data={appState.dialogsPage} dispatch={dispatch} />
-          )}
+          render={() => <DialogsContainer store={store} />}
         />
         <Route path="/news" component={News} />
         <Route path="/music" component={Music} />

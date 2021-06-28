@@ -1,12 +1,8 @@
 import React from 'react';
 import { postsBlock, posts } from './MyPosts.module.css';
 import Post from './Post/Post';
-import {
-  updateTextActionCreator,
-  addPostActionCreator,
-} from '../../../redux/profile-reducer';
 
-const MyPosts = ({ postsData, dispatch, newPostText }) => {
+const MyPosts = ({ postsData, updateNewPostText, addNewPost, newPostText }) => {
   let postsElement = postsData.map(({ message, likesCount, id }) => (
     <Post key={id} message={message} likesCount={likesCount} />
   ));
@@ -15,11 +11,10 @@ const MyPosts = ({ postsData, dispatch, newPostText }) => {
 
   const handleChangeText = () => {
     let text = newPostElement.current.value;
-    let action = updateTextActionCreator(text);
-    dispatch(action);
+    updateNewPostText(text);
   };
 
-  const handleAddPost = () => dispatch(addPostActionCreator());
+  const handleAddPost = () => addNewPost();
 
   return (
     <div className={postsBlock}>
