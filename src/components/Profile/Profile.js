@@ -3,11 +3,11 @@ import React from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 
-const Profile = ({ store }) => {
+const Profile = () => {
   return (
     <main className="App-content">
       <ProfileInfo />
-      <MyPostsContainer store={store} />
+      <MyPostsContainer />
     </main>
   );
 };

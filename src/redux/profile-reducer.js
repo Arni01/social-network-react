@@ -1,4 +1,3 @@
-/* eslint-disable default-case */
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
@@ -13,25 +12,34 @@ let initialState = {
 };
 
 const profileReducer = (state = initialState, action) => {
+  let newState;
   switch (action.type) {
     case ADD_POST:
+      let newId = state.postsData[state.postsData.length - 1].id + 1;
       let newPost = {
-        id: 5,
+        id: newId,
         message: state.newPostText,
         likesCount: 0,
       };
+      newState = {
+        ...state,
+        postsData: [...state.postsData, newPost],
+        newPostText: '',
+      };
+      break;
 
-      state.postsData.push(newPost);
-      state.newPostText = '';
-      break;
     case UPDATE_NEW_POST_TEXT:
-      state.newPostText = action.newText;
+      newState = {
+        ...state,
+        newPostText: action.newText,
+      };
       break;
+
     default:
       break;
   }
 
-  return state;
+  return newState || state;
 };
 
 export const addPostActionCreator = () => ({ type: ADD_POST });
