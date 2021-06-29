@@ -4,30 +4,30 @@ const SET_USERS = 'SET_USERS';
 
 let initialState = {
   users: [
-    {
-      id: 1,
-      avatarUrl: 'https://klike.net/uploads/posts/2019-03/1551512888_2.jpg',
-      followed: false,
-      fullName: 'Dmitry',
-      status: 'I am a boss',
-      location: { city: 'Minsk', country: 'Belarus' },
-    },
-    {
-      id: 2,
-      avatarUrl: 'https://klike.net/uploads/posts/2019-03/1551512888_2.jpg',
-      followed: true,
-      fullName: 'kek',
-      status: 'I am a afagage',
-      location: { city: 'Lida', country: 'Belarus' },
-    },
-    {
-      id: 3,
-      avatarUrl: 'https://klike.net/uploads/posts/2019-03/1551512888_2.jpg',
-      followed: false,
-      fullName: 'lol',
-      status: 'I am a aafaf',
-      location: { city: 'Moscow', country: 'Russia' },
-    },
+    // {
+    //   id: 1,
+    //   avatarUrl: 'https://klike.net/uploads/posts/2019-03/1551512888_2.jpg',
+    //   followed: false,
+    //   fullName: 'Dmitry',
+    //   status: 'I am a boss',
+    //   location: { city: 'Minsk', country: 'Belarus' },
+    // },
+    // {
+    //   id: 2,
+    //   avatarUrl: 'https://klike.net/uploads/posts/2019-03/1551512888_2.jpg',
+    //   followed: true,
+    //   fullName: 'kek',
+    //   status: 'I am a afagage',
+    //   location: { city: 'Lida', country: 'Belarus' },
+    // },
+    // {
+    //   id: 3,
+    //   avatarUrl: 'https://klike.net/uploads/posts/2019-03/1551512888_2.jpg',
+    //   followed: false,
+    //   fullName: 'lol',
+    //   status: 'I am a aafaf',
+    //   location: { city: 'Moscow', country: 'Russia' },
+    // },
   ],
 };
 
