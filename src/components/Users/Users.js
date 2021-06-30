@@ -5,10 +5,21 @@ const Users = (props) => {
   let pagesSize = Math.ceil(props.totalUsersCount / props.countUsersPage);
   let pagesList = [];
 
-  for (let i = 1; i <= pagesSize; i++) {
+  // if (pagesSize === 0) return <div></div>;
+  // if (props.selectedPage + 10 > pagesSize) {
+  //   for (let i = props.selectedPage; i < 10; i++) {
+  //     pagesList.push(i);
+  //   }
+  // } else {
+  //   for (let i = props.selectedPage; i < pagesSize; i++) {
+  //     pagesList.push(i);
+  //   }
+  // }
+
+  for (let i = 1; i < 10; i++) {
     pagesList.push(i);
   }
-
+  console.log('pagesList: ', pagesList.length);
   return (
     <div>
       <div>
