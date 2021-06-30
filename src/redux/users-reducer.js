@@ -1,34 +1,15 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_SELECTED_PAGE = 'SET_SELECTED_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 let initialState = {
-  users: [
-    // {
-    //   id: 1,
-    //   avatarUrl: 'https://klike.net/uploads/posts/2019-03/1551512888_2.jpg',
-    //   followed: false,
-    //   fullName: 'Dmitry',
-    //   status: 'I am a boss',
-    //   location: { city: 'Minsk', country: 'Belarus' },
-    // },
-    // {
-    //   id: 2,
-    //   avatarUrl: 'https://klike.net/uploads/posts/2019-03/1551512888_2.jpg',
-    //   followed: true,
-    //   fullName: 'kek',
-    //   status: 'I am a afagage',
-    //   location: { city: 'Lida', country: 'Belarus' },
-    // },
-    // {
-    //   id: 3,
-    //   avatarUrl: 'https://klike.net/uploads/posts/2019-03/1551512888_2.jpg',
-    //   followed: false,
-    //   fullName: 'lol',
-    //   status: 'I am a aafaf',
-    //   location: { city: 'Moscow', country: 'Russia' },
-    // },
-  ],
+  users: [],
+  countUsersPage: 10,
+  totalUsersCount: 0,
+  selectedPage: 1,
+  isFetching: false,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -59,7 +40,19 @@ const usersReducer = (state = initialState, action) => {
     case SET_USERS:
       newState = {
         ...state,
-        users: [...state.users, ...action.users],
+        users: action.users,
+      };
+      break;
+    case SET_SELECTED_PAGE:
+      newState = {
+        ...state,
+        selectedPage: action.selectedPage,
+      };
+      break;
+    case SET_TOTAL_USERS_COUNT:
+      newState = {
+        ...state,
+        totalUsersCount: action.totalUsersCount,
       };
       break;
     default:
@@ -72,5 +65,13 @@ const usersReducer = (state = initialState, action) => {
 export const followAC = (userId) => ({ type: FOLLOW, userId });
 export const unfollowAC = (userId) => ({ type: UNFOLLOW, userId });
 export const setUsersAC = (users) => ({ type: SET_USERS, users });
+export const setSelecedPageAC = (selectedPage) => ({
+  type: SET_SELECTED_PAGE,
+  selectedPage,
+});
+export const setTotalUsersCounterAC = (totalUsersCount) => ({
+  type: SET_TOTAL_USERS_COUNT,
+  totalUsersCount,
+});
 
 export default usersReducer;

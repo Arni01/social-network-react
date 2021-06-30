@@ -17,6 +17,11 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li className={item}>
+          <NavLink to="/users" activeClassName={active}>
+            Users
+          </NavLink>
+        </li>
+        <li className={item}>
           <NavLink to="/news" activeClassName={active}>
             News
           </NavLink>

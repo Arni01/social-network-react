@@ -1,24 +1,31 @@
-import axios from 'axios';
 import React from 'react';
 import styles from './Users.module.css';
 
 const Users = (props) => {
-  // const handleClickFollow = () => {
-  //   props.unfollow(u.id)
-  // }
-  const getUsers = () => {
-    if (props.users.length === 0) {
-      axios
-        .get('https://social-network.samuraijs.com/api/1.0/users')
-        .then((response) => {
-          props.setUsers(response.data.items);
-        });
-    }
-  };
+  let pagesSize = Math.ceil(props.totalUsersCount / props.countUsersPage);
+  let pagesList = [];
+
+  for (let i = 1; i <= pagesSize; i++) {
+    pagesList.push(i);
+  }
 
   return (
     <div>
-      <button onClick={getUsers}>Get Users</button>
+      <div>
+        {pagesList.map((p, index) => {
+          return (
+            <span
+              key={index}
+              className={props.selectedPage === p ? styles.selectedPage : ''}
+              onClick={() => {
+                props.clickSelectedPage(p);
+              }}
+            >
+              {p}
+            </span>
+          );
+        })}
+      </div>
       {props.users.map((u) => (
         <div key={u.id}>
           <span>
