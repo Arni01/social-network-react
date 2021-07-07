@@ -20,7 +20,6 @@ const Users = (props) => {
   for (let i = 1; i < 10; i++) {
     pagesList.push(i);
   }
-  console.log('pagesList: ', pagesList.length);
   return (
     <div>
       <div>
@@ -56,6 +55,7 @@ const Users = (props) => {
             <div>
               {u.followed ? (
                 <button
+                  disabled={props.followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
                     props.unfollow(u.id);
                   }}
@@ -64,6 +64,7 @@ const Users = (props) => {
                 </button>
               ) : (
                 <button
+                  disabled={props.followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
                     props.follow(u.id);
                   }}

@@ -3,41 +3,22 @@ import { connect } from 'react-redux';
 import {
   follow,
   setSelectedPage,
-  setTotalUsersCounter,
-  setUsers,
-  toggleIsFetching,
   unfollow,
+  toggleFollowingProgress,
+  getUsers,
 } from '../../redux/users-reducer';
-import axios from 'axios';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 
 class UsersContainer extends Component {
   componentDidMount() {
-    this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.selectedPage}&count=${this.props.countUsersPage}`
-      )
-      .then((response) => {
-        this.props.setTotalUsersCounter(response.data.totalCount);
-        this.props.setUsers(response.data.items);
-        this.props.toggleIsFetching(false);
-      });
+    this.props.getUsers(this.props.selectedPage, this.props.countUsersPage);
   }
 
   clickSelectedPage = (pageNumber) => {
     if (pageNumber === this.props.selectedPage) return;
     this.props.setSelectedPage(pageNumber);
-    this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.countUsersPage}`
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.toggleIsFetching(false);
-      });
+    this.props.getUsers(pageNumber, this.props.countUsersPage);
   };
 
   render() {
@@ -54,6 +35,7 @@ class UsersContainer extends Component {
           users={this.props.users}
           follow={this.props.follow}
           unfollow={this.props.unfollow}
+          followingInProgress={this.props.followingInProgress}
         />
       </>
     );
@@ -67,6 +49,7 @@ let mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     selectedPage: state.usersPage.selectedPage,
     isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress,
   };
 };
 
@@ -98,8 +81,6 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   follow,
   unfollow,
-  setUsers,
   setSelectedPage,
-  setTotalUsersCounter,
-  toggleIsFetching,
+  getUsers,
 })(UsersContainer);

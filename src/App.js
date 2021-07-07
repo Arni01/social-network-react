@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import News from './components/News/News';
@@ -13,7 +13,7 @@ import UsersContainer from './components/Users/UsersContainer';
 function App({ store }) {
   return (
     <div className="App">
-      <Header />
+      <HeaderContainer />
       <Navbar />
       <div className="App-content">
         <Route path="/profile/:userId?" component={ProfileContainer} />
