@@ -9,8 +9,9 @@ import Settings from './components/Settings/Settings';
 import { Route } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
+import Login from './components/Login/Login';
 
-function App({ store }) {
+function App() {
   return (
     <div className="App">
       <HeaderContainer />
@@ -22,6 +23,7 @@ function App({ store }) {
         <Route path="/news" component={News} />
         <Route path="/music" component={Music} />
         <Route path="/settings" component={Settings} />
+        <Route path="/login" component={Login} />
       </div>
     </div>
   );

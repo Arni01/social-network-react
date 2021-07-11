@@ -3,19 +3,20 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import { dialogs, dialogsItems, messages } from './Dialogs.module.css';
 
-const Dialogs = ({ data, updateNewMessageText, sendMessage }) => {
-  let dialogsElement = data.dialogsData.map(({ name, id }) => (
+const Dialogs = (props) => {
+  let state = props.data;
+  let dialogsElement = state.dialogsData.map(({ name, id }) => (
     <DialogItem key={id} name={name} id={id} />
   ));
-  let messagesElement = data.messagesData.map((m) => (
+  let messagesElement = state.messagesData.map((m) => (
     <Message key={m.id} text={m.message} />
   ));
 
   const hadnleOnSendMessageClick = () => {
-    sendMessage();
+    props.sendMessage();
   };
   const handleChangeMessageText = ({ target }) => {
-    updateNewMessageText(target.value);
+    props.updateNewMessageText(target.value);
   };
 
   return (
@@ -26,7 +27,7 @@ const Dialogs = ({ data, updateNewMessageText, sendMessage }) => {
         <div>
           <div>
             <textarea
-              value={data.newMessageText}
+              value={state.newMessageText}
               onChange={handleChangeMessageText}
               placeholder="Enter your message"
             />
