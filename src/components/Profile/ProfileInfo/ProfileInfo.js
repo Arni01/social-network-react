@@ -1,6 +1,7 @@
 import React from 'react';
 import { discriptionBlock } from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader';
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
@@ -23,7 +24,10 @@ const ProfileInfo = (props) => {
           }
           alt={props.profile.fullName}
         />
-        ava + description
+        <ProfileStatus
+          status={props.status}
+          updateStatus={props.updateStatus}
+        />
       </div>
     </>
   );
