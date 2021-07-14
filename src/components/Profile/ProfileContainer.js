@@ -11,7 +11,7 @@ import { compose } from 'redux';
 
 class ProfileContainer extends Component {
   componentDidMount() {
-    let userId = this.props.match.params.userId || 18160;
+    let userId = this.props.match.params.userId || this.props.loginUserId;
 
     this.props.getUserProfile(userId);
     this.props.getUserStatus(userId);
@@ -31,6 +31,7 @@ class ProfileContainer extends Component {
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
   status: state.profilePage.status,
+  loginUserId: state.auth.id,
 });
 
 // let WithUrlProfileContainer = withRouter(ProfileContainer);
