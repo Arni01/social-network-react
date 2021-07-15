@@ -5,12 +5,12 @@ import { requiredField } from '../../utils/validators/validator';
 import { Input } from '../common/FormControls/FormControls';
 import { login } from '..//..//redux/auth-reducer';
 import { Redirect } from 'react-router-dom';
-import s from '..//common/FormControls/FormControls.module.css';
+import { formSummaryError } from '..//common/FormControls/FormControls.module.css';
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleSubmit, error }) => {
   return (
-    <form onSubmit={props.handleSubmit}>
-      {props.error && <div className={s.formSummaryError}>{props.error}</div>}
+    <form onSubmit={handleSubmit}>
+      {error && <div className={formSummaryError}>{error}</div>}
       <div>
         <label htmlFor="email">Email</label>
         <Field
@@ -52,12 +52,12 @@ const LoginReduxFrom = reduxForm({
   form: 'login',
 })(LoginForm);
 
-const Login = (props) => {
+const Login = ({ login, isAuth }) => {
   const onSubmit = (formData) => {
-    props.login(formData.email, formData.password, formData.rememberMe);
+    login(formData.email, formData.password, formData.rememberMe);
   };
 
-  if (props.isAuth) {
+  if (isAuth) {
     return <Redirect to="/profile" />;
   }
 

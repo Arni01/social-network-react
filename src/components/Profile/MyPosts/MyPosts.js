@@ -5,7 +5,28 @@ import { Textarea } from '../../common/FormControls/FormControls';
 import { postsBlock, posts } from './MyPosts.module.css';
 import Post from './Post/Post';
 
+const maxLenght10 = maxLenght(10);
+
+const AddNewPost = (props) => {
+  console.log('ADD NEW POST');
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <Field
+        name="newPostText"
+        component={Textarea}
+        validate={[requiredField, maxLenght10]}
+      />
+      <button>Add post</button>
+    </form>
+  );
+};
+
+const AddNewPostRedux = reduxForm({ form: 'profileAddNewPostForm' })(
+  AddNewPost
+);
+
 const MyPosts = (props) => {
+  console.log('MY POSTS');
   let postsElement = props.postsData.map(({ message, likesCount, id }) => (
     <Post key={id} message={message} likesCount={likesCount} />
   ));
@@ -24,24 +45,5 @@ const MyPosts = (props) => {
     </div>
   );
 };
-
-const maxLenght10 = maxLenght(10);
-
-const AddNewPost = (props) => {
-  return (
-    <form onSubmit={props.handleSubmit}>
-      <Field
-        name="newPostText"
-        component={Textarea}
-        validate={[requiredField, maxLenght10]}
-      />
-      <button>Add post</button>
-    </form>
-  );
-};
-
-const AddNewPostRedux = reduxForm({ form: 'profileAddNewPostForm' })(
-  AddNewPost
-);
 
 export default MyPosts;

@@ -1,17 +1,16 @@
 import React from 'react';
-import { discriptionBlock } from './ProfileInfo.module.css';
+import { discriptionBlock, fotosBlock } from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader';
-import ProfileStatus from './ProfileStatus';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
-const ProfileInfo = (props) => {
-  if (!props.profile) {
+const ProfileInfo = ({ profile, status, updateStatus }) => {
+  if (!profile) {
     return <Preloader />;
   }
 
   return (
     <>
-      <div>
+      <div className={fotosBlock}>
         <img
           src="https://img.gazeta.ru/files3/845/7947845/upload-shutterstock_117062077-pic905v-895x505-99863.jpg"
           alt="test"
@@ -20,15 +19,12 @@ const ProfileInfo = (props) => {
       <div className={discriptionBlock}>
         <img
           src={
-            props.profile.photos.large ||
+            profile.photos.large ||
             'https://klike.net/uploads/posts/2019-03/1551512888_2.jpg'
           }
-          alt={props.profile.fullName}
+          alt={profile.fullName}
         />
-        <ProfileStatusWithHooks
-          status={props.status}
-          updateStatus={props.updateStatus}
-        />
+        <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
       </div>
     </>
   );

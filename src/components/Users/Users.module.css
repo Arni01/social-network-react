@@ -9,15 +9,3 @@
   height: 100%;
   width: auto;
 }
-
-span {
-  display: inline-block;
-  cursor: pointer;
-  padding: 5px;
-  margin: 5px;
-  background-color: darkslateblue;
-}
-.selectedPage {
-  font-weight: bold;
-  background-color: goldenrod;
-}

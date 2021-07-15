@@ -1,0 +1,11 @@
+.paginator span {
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px;
+  margin: 5px;
+  background-color: darkslateblue;
+}
+.paginator .selectedPage {
+  font-weight: bold;
+  background-color: goldenrod;
+}

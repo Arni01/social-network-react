@@ -16,21 +16,22 @@ import {
   getIsFetching,
   getFollowingInProgress,
 } from '../../redux/users-selectors';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 class UsersContainer extends Component {
   componentDidMount() {
-    this.props.getUsers(this.props.selectedPage, this.props.countUsersPage);
+    const { selectedPage, countUsersPage } = this.props;
+    this.props.getUsers(selectedPage, countUsersPage);
   }
 
   clickSelectedPage = (pageNumber) => {
-    if (pageNumber === this.props.selectedPage) return;
-    this.props.setSelectedPage(pageNumber);
-    this.props.getUsers(pageNumber, this.props.countUsersPage);
+    const { selectedPage, countUsersPage } = this.props;
+    if (pageNumber === selectedPage) return;
+    this.props.getUsers(pageNumber, countUsersPage);
   };
 
   render() {
-    console.log('UsersContainer: 1');
-
     return this.props.isFetching ? (
       <Preloader />
     ) : (
@@ -70,9 +71,12 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  follow,
-  unfollow,
-  setSelectedPage,
-  getUsers,
-})(UsersContainer);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setSelectedPage,
+    getUsers,
+  })
+)(UsersContainer);

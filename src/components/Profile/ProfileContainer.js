@@ -8,6 +8,7 @@ import {
 } from '../../redux/profile-reducer';
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
 import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 class ProfileContainer extends Component {
   componentDidMount() {
@@ -37,6 +38,7 @@ let mapStateToProps = (state) => ({
 // let WithUrlProfileContainer = withRouter(ProfileContainer);
 
 export default compose(
+  withRouter,
   connect(mapStateToProps, { getUserProfile, getUserStatus, updateStatus }),
   withAuthRedirect
 )(ProfileContainer);

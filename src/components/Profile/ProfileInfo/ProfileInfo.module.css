@@ -1,3 +1,17 @@
+.fotosBlock {
+  margin: 10px;
+}
+
+.fotosBlock img {
+  width: 500px;
+  height: auto;
+}
+
 .discriptionBlock {
-  padding: 10px;
+  margin: 10px;
+}
+
+.discriptionBlock img {
+  width: 300px;
+  height: auto;
 }
