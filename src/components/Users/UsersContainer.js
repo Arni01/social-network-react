@@ -8,6 +8,14 @@ import {
 } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
+import {
+  getUsersState,
+  getСountUsersPage,
+  getTotalUsersCount,
+  getSelectedPage,
+  getIsFetching,
+  getFollowingInProgress,
+} from '../../redux/users-selectors';
 
 class UsersContainer extends Component {
   componentDidMount() {
@@ -40,14 +48,25 @@ class UsersContainer extends Component {
   }
 }
 
+// let mapStateToProps = (state) => {
+//   return {
+//     users: state.usersPage.users,
+//     countUsersPage: state.usersPage.countUsersPage,
+//     totalUsersCount: state.usersPage.totalUsersCount,
+//     selectedPage: state.usersPage.selectedPage,
+//     isFetching: state.usersPage.isFetching,
+//     followingInProgress: state.usersPage.followingInProgress,
+//   };
+// };
+
 let mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    countUsersPage: state.usersPage.countUsersPage,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    selectedPage: state.usersPage.selectedPage,
-    isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress,
+    users: getUsersState(state),
+    countUsersPage: getСountUsersPage(state),
+    totalUsersCount: getTotalUsersCount(state),
+    selectedPage: getSelectedPage(state),
+    isFetching: getIsFetching(state),
+    followingInProgress: getFollowingInProgress(state),
   };
 };
 
