@@ -7,7 +7,7 @@ import { login } from '..//..//redux/auth-reducer';
 import { Redirect } from 'react-router-dom';
 import { formSummaryError } from '..//common/FormControls/FormControls.module.css';
 
-const LoginForm = ({ handleSubmit, error }) => {
+const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
   return (
     <form onSubmit={handleSubmit}>
       {error && <div className={formSummaryError}>{error}</div>}
@@ -41,6 +41,21 @@ const LoginForm = ({ handleSubmit, error }) => {
         />
         <label htmlFor="rememberMe">Remember me</label>
       </div>
+      {captchaUrl && (
+        <div>
+          <label htmlFor="captcha">
+            <img src={captchaUrl} alt="captcha" />
+          </label>
+          <Field
+            id={'captcha'}
+            name={'captcha'}
+            placeholder="Enter a code"
+            component={Input}
+            type="text"
+            validate={[requiredField]}
+          />
+        </div>
+      )}
       <div>
         <button>Sing in</button>
       </div>
@@ -52,9 +67,14 @@ const LoginReduxFrom = reduxForm({
   form: 'login',
 })(LoginForm);
 
-const Login = ({ login, isAuth }) => {
+const Login = ({ login, isAuth, captchaUrl }) => {
   const onSubmit = (formData) => {
-    login(formData.email, formData.password, formData.rememberMe);
+    login(
+      formData.email,
+      formData.password,
+      formData.rememberMe,
+      formData.captcha
+    );
   };
 
   if (isAuth) {
@@ -64,13 +84,14 @@ const Login = ({ login, isAuth }) => {
   return (
     <div>
       <h1>Login</h1>
-      <LoginReduxFrom onSubmit={onSubmit} />
+      <LoginReduxFrom onSubmit={onSubmit} captchaUrl={captchaUrl} />
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
+  captchaUrl: state.auth.captchaUrl,
 });
 
 export default connect(mapStateToProps, { login })(Login);
