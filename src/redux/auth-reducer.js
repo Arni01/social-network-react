@@ -68,11 +68,9 @@ export const getCaptchaUrl = () => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  debugger;
   let response = await authAPI.logout();
   if (response.resultCode === 0) {
     dispatch(setAuthUserData(null, null, null, false));
-    dispatch(getAuthUserData());
   }
 };
 export default authReducer;
