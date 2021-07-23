@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  follow,
-  setSelectedPage,
-  unfollow,
-  getUsers,
-} from '../../redux/users-reducer';
+import { follow, unfollow, getUsers } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import {
@@ -18,14 +13,35 @@ import {
 } from '../../redux/users-selectors';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
+import { UserType } from '../../types/types';
+import { AppStateType } from '../../redux/redux-store';
 
-class UsersContainer extends Component {
+type MapStatePropsType = {
+  selectedPage: number;
+  countUsersPage: number;
+  isFetching: boolean;
+  totalUsersCount: number;
+  users: Array<UserType>;
+  followingInProgress: Array<number>;
+};
+type MapDispatchPropsType = {
+  follow: (id: number) => void;
+  unfollow: (id: number) => void;
+  getUsers: (selectedPage: number, countUsersPage: number) => void;
+};
+type OwnPropsType = {
+  pageTtitle: string;
+};
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
+
+class UsersContainer extends Component<PropsType> {
   componentDidMount() {
     const { selectedPage, countUsersPage } = this.props;
     this.props.getUsers(selectedPage, countUsersPage);
   }
 
-  clickSelectedPage = (pageNumber) => {
+  clickSelectedPage = (pageNumber: number) => {
     const { selectedPage, countUsersPage } = this.props;
     if (pageNumber === selectedPage) return;
     this.props.getUsers(pageNumber, countUsersPage);
@@ -49,18 +65,7 @@ class UsersContainer extends Component {
   }
 }
 
-// let mapStateToProps = (state) => {
-//   return {
-//     users: state.usersPage.users,
-//     countUsersPage: state.usersPage.countUsersPage,
-//     totalUsersCount: state.usersPage.totalUsersCount,
-//     selectedPage: state.usersPage.selectedPage,
-//     isFetching: state.usersPage.isFetching,
-//     followingInProgress: state.usersPage.followingInProgress,
-//   };
-// };
-
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
   return {
     users: getUsersState(state),
     countUsersPage: getСountUsersPage(state),
@@ -73,10 +78,12 @@ let mapStateToProps = (state) => {
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setSelectedPage,
-    getUsers,
-  })
+  connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(
+    mapStateToProps,
+    {
+      follow,
+      unfollow,
+      getUsers,
+    }
+  )
 )(UsersContainer);
