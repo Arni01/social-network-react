@@ -38,10 +38,7 @@ export const profileAPI = {
   savePhoto(photo) {
     const formData = new FormData();
     formData.append('image', photo);
-    return instance.put('profile/photo', formData).then((r) => {
-      console.log('Response: ', r);
-      return r.data;
-    });
+    return instance.put('profile/photo', formData).then((r) => r.data);
   },
   saveProfile(formData) {
     return instance.put('profile', formData).then((r) => r.data);
@@ -58,7 +55,7 @@ export const authAPI = {
       .then((r) => r.data);
   },
   logout() {
-    return instance.delete('auth/login');
+    return instance.delete('auth/login').then((r) => r.data);
   },
 };
 export const securityAPI = {
